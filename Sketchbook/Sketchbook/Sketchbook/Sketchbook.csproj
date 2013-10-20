@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="FigureDescription.cs" />
     <Compile Include="FigurePreferences.cs" />
+    <Compile Include="Geometry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SketchbookForm.cs">

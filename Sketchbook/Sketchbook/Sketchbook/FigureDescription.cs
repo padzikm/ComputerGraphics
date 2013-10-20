@@ -26,12 +26,32 @@ namespace Sketchbook
 
         public void AddPoint(Point point)
         {
-            FigurePoints.AddLast(point);
+            Geometry.Point ptkMin = new Geometry.Point(int.MaxValue, int.MaxValue);
+            Geometry.Point[] points = new Geometry.Point[FigurePoints.Count];
+            int i = -1;
+
+            foreach (Point p in FigurePoints)
+            {
+                points[++i] = new Geometry.Point(p.X, p.Y);
+                if (points[i].y < ptkMin.y)
+                    ptkMin = points[i];
+            }
+
+            points = Geometry.AngleSort(ptkMin, points);
+            FigurePoints = new LinkedList<Point>();
+            foreach (Geometry.Point p in points)
+                FigurePoints.AddLast(new Point((int)p.x, (int)p.y));
         }
 
-        public bool RemovePoint(Point point)
+        public void RemovePoint(Point point)
         {
-            return FigurePoints.Remove(point);
+            LinkedListNode<Point> node = FigurePoints.First;
+            for (int i = 0; i < FigurePoints.Count; ++i)
+                if (node.Value.X <= point.X && node.Value.X + FigurePreferences.LineThickness > node.Value.X && node.Value.Y <= point.Y && node.Value.Y + FigurePreferences.LineThickness > point.Y)
+                {
+                    FigurePoints.Remove(node);
+                    return;
+                }
         }
 
         public void ReplacePoint(Point oldPoint, Point newPoint)
@@ -64,7 +84,7 @@ namespace Sketchbook
         {
             LinkedListNode<Point> node = FigurePoints.First;
             for (int i = 0; i < FigurePoints.Count; ++i)
-                if ((node.Value.X == point.X && node.Value.Y == point.Y) || (node.Value.X == point.X && node.Value.Y < point.Y && node.Value.Y + FigurePreferences.LineThickness > point.X))
+                if (node.Value.X <= point.X && node.Value.X + FigurePreferences.LineThickness > node.Value.X && node.Value.Y <= point.Y && node.Value.Y + FigurePreferences.LineThickness > point.Y)
                     return true;
             return false;
         }
@@ -102,6 +122,6 @@ namespace Sketchbook
             }
 
             return inside;
-        }
+        }        
     }
 }
