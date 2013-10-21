@@ -21,6 +21,7 @@ namespace Sketchbook
         Point point;
         bool moveVertex;
         bool moveFigure;
+        bool removeVertex;
         FigureDescription movingFig;
 
         public SketchbookForm()
@@ -40,12 +41,12 @@ namespace Sketchbook
 
         private void sketchbookArea_Paint(object sender, PaintEventArgs e)
         {
-            Bitmap bitmap = new Bitmap(sketchbookArea.Width - 20, sketchbookArea.Height - 10);
+            Bitmap bitmap = new Bitmap(sketchbookArea.Width, sketchbookArea.Height);
 
             foreach (FigureDescription figure in figures)
                 lineDrawingAlgorithm.DrawFigure(bitmap, figure.FigurePoints, figure.FigurePreferences.LineThickness, figure.FigurePreferences.BorderColor);
-
-            e.Graphics.DrawImage(bitmap, bitmap.Width, 0, bitmap.Width, bitmap.Height);
+            
+            e.Graphics.DrawImage(bitmap, 0, 0, bitmap.Width, bitmap.Height);
         }
 
         private void drawButton_Click(object sender, EventArgs e)
@@ -60,23 +61,29 @@ namespace Sketchbook
                 FigureDescription figure = figures.ElementAt(selectedFigure);
                 figure.FigurePreferences = new FigurePreferences(color, lineThickness);
             }
-            this.Invalidate();
+            sketchbookArea.Invalidate();
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
             figures = new LinkedList<FigureDescription>();
-            this.Invalidate();
+            selectedFigure = -2;
+            selectedFigureComboBox.Items.Clear();
+            selectedFigureComboBox.Items.Add("New figure");
+            selectedFigureComboBox.Items.Add("All figures");
+            selectedFigureComboBox.SelectedIndex = 0;
+            sketchbookArea.Invalidate();
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
             if (selectedFigure < 0)
                 return;
-            figures.Remove(figures.ElementAt(selectedFigure));
+            figures.Remove(figures.ElementAt(selectedFigure));            
+            selectedFigureComboBox.Items.RemoveAt(selectedFigure + 2);
+            selectedFigureComboBox.SelectedIndex = selectedFigure + 1;
             --selectedFigure;
-            selectedFigureComboBox.SelectedIndex = selectedFigure + 2;
-            this.Invalidate();
+            sketchbookArea.Invalidate();
         }
 
         private void sketchbookArea_MouseClick(object sender, MouseEventArgs e)
@@ -98,9 +105,10 @@ namespace Sketchbook
 
             if (selectedAction == 0)
                 figure.AddPoint(e.Location);
-            else
-                figure.RemovePoint(e.Location);
-            this.Invalidate();
+            else if (selectedAction == 2 && figure.IsVertex(e.Location))
+                figure.RemovePoint();
+            if(figure.FigurePoints.Count > 1)
+                sketchbookArea.Invalidate();
         }
 
         private void selectedFigureComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -126,13 +134,18 @@ namespace Sketchbook
 
         private void lineThicknessTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (lineThicknessTextBox.Text == "")
+            {
+                lineThickness = 1;
+                return;
+            }
             lineThickness = int.Parse(lineThicknessTextBox.Text);
         }
 
         private void sketchbookArea_MouseDown(object sender, MouseEventArgs e)
         {
             if (selectedFigure < 0 || selectedAction != 1)
-                return;
+                return;            
             FigureDescription figure = figures.ElementAt(selectedFigure);
             if (figure.IsVertex(e.Location))
             {
@@ -156,14 +169,14 @@ namespace Sketchbook
             if (selectedFigure < 0 || selectedAction != 1)
                 return;
             if (moveVertex)            
-                movingFig.ReplacePoint(point, e.Location);
+                movingFig.ReplacePoint(e.Location);
 
             if (moveFigure)
                 movingFig.MoveFigure(new Point(e.Location.X - point.X, e.Location.Y - point.Y));
 
             moveVertex = false;
             moveFigure = false;
-            this.Invalidate();
+            sketchbookArea.Invalidate();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Sketchbook
     {
         public LinkedList<Point> FigurePoints;
         public FigurePreferences FigurePreferences;
+        Point replace;
 
         public FigureDescription()
         {
@@ -27,9 +28,10 @@ namespace Sketchbook
         public void AddPoint(Point point)
         {
             Geometry.Point ptkMin = new Geometry.Point(int.MaxValue, int.MaxValue);
-            Geometry.Point[] points = new Geometry.Point[FigurePoints.Count];
-            int i = -1;
+            Geometry.Point[] points = new Geometry.Point[FigurePoints.Count + 1];
+            int i = 0;
 
+            points[0] = new Geometry.Point(point.X, point.Y);
             foreach (Point p in FigurePoints)
             {
                 points[++i] = new Geometry.Point(p.X, p.Y);
@@ -41,10 +43,12 @@ namespace Sketchbook
             FigurePoints = new LinkedList<Point>();
             foreach (Geometry.Point p in points)
                 FigurePoints.AddLast(new Point((int)p.x, (int)p.y));
+            //FigurePoints.AddLast(point);
         }
 
-        public void RemovePoint(Point point)
+        public void RemovePoint()
         {
+            Point point = replace;
             LinkedListNode<Point> node = FigurePoints.First;
             for (int i = 0; i < FigurePoints.Count; ++i)
                 if (node.Value.X <= point.X && node.Value.X + FigurePreferences.LineThickness > node.Value.X && node.Value.Y <= point.Y && node.Value.Y + FigurePreferences.LineThickness > point.Y)
@@ -54,13 +58,13 @@ namespace Sketchbook
                 }
         }
 
-        public void ReplacePoint(Point oldPoint, Point newPoint)
+        public void ReplacePoint(Point newPoint)
         {
             LinkedListNode<Point> node = FigurePoints.First;
 
             for (int i = 0; i < FigurePoints.Count; ++i)
             {
-                if (node.Value.X == oldPoint.X && node.Value.Y == oldPoint.Y)
+                if (node.Value.X == replace.X && node.Value.Y == replace.Y)
                 {
                     node.Value = newPoint;
                     return;
@@ -84,8 +88,14 @@ namespace Sketchbook
         {
             LinkedListNode<Point> node = FigurePoints.First;
             for (int i = 0; i < FigurePoints.Count; ++i)
+            {
                 if (node.Value.X <= point.X && node.Value.X + FigurePreferences.LineThickness > node.Value.X && node.Value.Y <= point.Y && node.Value.Y + FigurePreferences.LineThickness > point.Y)
+                {
+                    replace = node.Value;
                     return true;
+                }
+                node = node.Next;
+            }
             return false;
         }
 
