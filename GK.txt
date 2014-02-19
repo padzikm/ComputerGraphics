@@ -1,0 +1,18 @@
+zad. 3
+algorytmy redukcji kolorow
+wczytujemy obrazek (bitmape), porownac algorytm popularnosciowy i error difushion, do zadanej liczby kolorow (na obrazku 3 okna)
+
+laby 3: redukcja rownomiernego podzialu szescianu - dzielimy kazdy kanal
+
+zad. 4
+1 - macierzowe filtry
+wystarczy 3x3 plus dwa parametry
+filtr do calego obrazka, albo opcja malowanie pedzelkiem (prostokatny) tam gdzie jest pedzelek tam sie filtruje - dla calego rgb
+
+przez pare mc nie mialem z M kontaktu, pogadalismy w wakacje, powiedzialem, ze chcialbym, zeby bylo tak jak dawniej i ze to zalezy od checi obu stron. Ona w to nie wierzyla, ale pozniej sama napisala, ze chcialaby miec taki kontakt i rzeczywiscie ma nadzieje, ze jak obie strony sie postaraja to taki bedzie. 
+Potem bylo zupelnie zwyczajnie, czasem pogadalismy bez zadnej rewelacji, az sie spotkalismy gdzies w pazdzierniku. Miala bardzo zly humor, wiec z Parzuchem wymyslilem, zeby sie umowic na piwo i zrobic wesola atmosfere dwoch wariatow, to i trzeci sie odrodzi. Wyszlo tyle, ze Parzuchowi nie chcialo sie ruszyc tylka, wiec umowilem sie z M, ze ja odprowadze do domu spacerem. Nie bylo zadnych fajerwerkow, troche pogadalismy, ale miala strasznie kiepski nastroj. Jak sie jej spytalem na co ma ochote to dostalem w odp 'umrzec'. Przytulilem ja na odchodne i tyle. Pozniej widzielismy sie tak jeszcze dwa razy z podobnym skutkiem i odwiedzilem ja w pracy (pracuje na recepcji w szkole tanca za galeria centrum). Bylo bardzo fajnie, posmialismy sie, pogadalismy i w koncu byla usmiechnieta. Dokladniej wczesniej podczas spacerow tez miala takie momenty, ale teraz to faktycznie byl wspolny susz dziasel ;)
+Potem wiecej ze soba pisalismy, jeszcze ja raz (chyba ;p) odwiedzilem i za kazdym razem efektem byla atmosfera szczescia i szkoda, ze trzeba wracac do domu. Na fb dawalem jej sygnaly, ze chce czegos wiecej, ona jak kiedys pisala mi mile wiadomosci i smsy typu:
+'kolejna pobudka i Ciebie nadal tu obok nie ma... Ile mozna czekac...zostaw te slajdy... Gwarantuje, ze ze mna noc bedzie przyjemniejsza... mimo, ze ja jestem jedna, a ich wiele ;)'
+akurat wtedy bylem u kolezanki niedaleko, bo nie odczytywala moich wiadomosci tak jakbym chcial, a dokladniej myslalem, ze ktos jej cos podpowiedziale i gra tak, zeby mnie wziac na przeczekanie i pewnosc tego co pisze, wiec poszedlem pomyslec na cudzym parapecie (o tym przeczytasz w liscie).
+Nastepnego dnia stwiedzilem, ze internetowych zwiazkow nie chce i poszedlem do niej do pracy - byla sobota wieczor, pusto i moglismy pogadac.
+
